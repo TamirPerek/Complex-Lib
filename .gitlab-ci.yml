@@ -24,5 +24,4 @@ build:
 test:
   stage: test
   script:
-    - ./mybinary
     - make test
