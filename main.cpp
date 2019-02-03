@@ -169,5 +169,5 @@ int main(void)
               << result.toString() << std::endl
               << std::endl;
 
-    return -1;
+    return EXIT_SUCCESS;
 }
