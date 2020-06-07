@@ -5,7 +5,9 @@ test*
 .vscode
 direction.*
 main.c
+*.log
 
+*.dSYM
 
 # Prerequisites
 *.d
