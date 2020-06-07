@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include "complex.hpp"
-#include "../NeuralNetwork/neuralnetwork/matrix/matrix.hpp"
+#include "matrix/matrix.hpp"
 
 #define MATRIXROW 5
 #define MATRIXCOLUMNS 2
