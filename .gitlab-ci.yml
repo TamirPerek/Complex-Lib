@@ -11,6 +11,8 @@ build:
   # before_script: 
   #   - apt update && apt -y install make autoconf 
   script: 
+    - git init submodule
+    - git submodule update
     - g++ main.cpp -o mybinary
   # artifacts:
   #   paths:
