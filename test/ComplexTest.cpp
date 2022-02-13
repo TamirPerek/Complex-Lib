@@ -14,8 +14,8 @@ struct ComplexTest : public testing::Test
     {
         m_Number.setReal(8.0);
         m_Number.setImaginary(-7.0);
-        //      Cartesian: 8.000000 -j 7.000000
-        //      Polar: 10.63014581273465(cos(-0.71882999962162453°) +j sin(-0.71882999962162453°))
+        // Cartesian: 8.000000 -j 7.000000
+        // Polar: 10.63014581273465(cos(-0.71882999962162453°) +j sin(-0.71882999962162453°))
     }
 
     const Comp &Get() const noexcept
