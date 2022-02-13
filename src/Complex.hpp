@@ -240,7 +240,7 @@ Complex<T> &Complex<T>::operator/=(const T &_add)
 }
 
 // Mulitplication
-template <class T>
+template <typename T>
 Complex<T> operator*(const Complex<T> &_complex1, const Complex<T> &_complex2)
 {
     T re;
@@ -250,7 +250,7 @@ Complex<T> operator*(const Complex<T> &_complex1, const Complex<T> &_complex2)
     return Complex<T>(re, img);
 }
 
-template <class T>
+template <typename T>
 Complex<T> operator*(const T _add, const Complex<T> &_complex)
 {
     T re;
@@ -260,7 +260,7 @@ Complex<T> operator*(const T _add, const Complex<T> &_complex)
     return Complex<T>(re, img);
 }
 
-template <class T>
+template <typename T>
 Complex<T> operator*(const Complex<T> &_complex, const T _add)
 {
     T re;
@@ -271,7 +271,7 @@ Complex<T> operator*(const Complex<T> &_complex, const T _add)
 }
 
 // Division
-template <class T>
+template <typename T>
 Complex<T> operator/(const Complex<T> &_complex1, const Complex<T> &_complex2)
 {
     T re;
@@ -281,7 +281,7 @@ Complex<T> operator/(const Complex<T> &_complex1, const Complex<T> &_complex2)
     return Complex<T>(re, img);
 }
 
-template <class T>
+template <typename T>
 Complex<T> operator/(const T _add, const Complex<T> &_complex)
 {
     T re;
@@ -291,7 +291,7 @@ Complex<T> operator/(const T _add, const Complex<T> &_complex)
     return Complex<T>(re, img);
 }
 
-template <class T>
+template <typename T>
 Complex<T> operator/(const Complex<T> &_complex, const T _add)
 {
     T re;
@@ -302,7 +302,7 @@ Complex<T> operator/(const Complex<T> &_complex, const T _add)
 }
 
 // Addition
-template <class T>
+template <typename T>
 Complex<T> operator+(const Complex<T> &_complex1, const Complex<T> &_complex2)
 {
     T re;
@@ -312,7 +312,7 @@ Complex<T> operator+(const Complex<T> &_complex1, const Complex<T> &_complex2)
     return Complex<T>(re, img);
 }
 
-template <class T>
+template <typename T>
 Complex<T> operator+(const T _add, const Complex<T> &_complex)
 {
     T re;
@@ -322,7 +322,7 @@ Complex<T> operator+(const T _add, const Complex<T> &_complex)
     return Complex<T>(re, img);
 }
 
-template <class T>
+template <typename T>
 Complex<T> operator+(const Complex<T> &_complex, const T _add)
 {
     T re;
@@ -333,7 +333,7 @@ Complex<T> operator+(const Complex<T> &_complex, const T _add)
 }
 
 // Subtraction
-template <class T>
+template <typename T>
 Complex<T> operator-(const Complex<T> &_complex1, const Complex<T> &_complex2)
 {
     T re;
@@ -343,7 +343,7 @@ Complex<T> operator-(const Complex<T> &_complex1, const Complex<T> &_complex2)
     return Complex<T>(re, img);
 }
 
-template <class T>
+template <typename T>
 Complex<T> operator-(const T _add, const Complex<T> &_complex)
 {
     T re;
@@ -353,7 +353,7 @@ Complex<T> operator-(const T _add, const Complex<T> &_complex)
     return Complex<T>(re, img);
 }
 
-template <class T>
+template <typename T>
 Complex<T> operator-(const Complex<T> &_complex, const T _add)
 {
     T re;
@@ -377,7 +377,7 @@ std::ostream &operator<<(std::ostream &os, const Complex<T> &_complex)
     return os;
 }
 
-template <class T>
+template <typename T>
 bool operator==(const Complex<T> &_complex1, const Complex<T> &_complex2)
 {
     if (_complex1.getReal() == _complex2.getReal() && _complex1.getImaginary() == _complex2.getImaginary() && _complex1.getPhi() == _complex2.getPhi() && _complex1.getAbsolute() == _complex2.getAbsolute())
@@ -387,13 +387,13 @@ bool operator==(const Complex<T> &_complex1, const Complex<T> &_complex2)
     return false;
 }
 
-template <class T>
+template <typename T>
 bool operator!=(const Complex<T> &_complex1, const Complex<T> &_complex2)
 {
     return !(_complex1 == _complex2);
 }
 
-template <class T>
+template <typename T>
 bool operator==(const T &_comp, const Complex<T> &_complex2)
 {
     if (_complex2.getImaginary() != 0 || _complex2.getPhi() != 0)
@@ -404,13 +404,13 @@ bool operator==(const T &_comp, const Complex<T> &_complex2)
         return false;
 }
 
-template <class T>
+template <typename T>
 bool operator!=(const T &_comp, const Complex<T> &_complex2)
 {
     return !(_comp == _complex2);
 }
 
-template <class T>
+template <typename T>
 bool operator==(const Complex<T> &_complex1, const T &_comp)
 {
     if (_complex1.getImaginary() != 0 || _complex1.getPhi() != 0)
@@ -421,13 +421,13 @@ bool operator==(const Complex<T> &_complex1, const T &_comp)
         return false;
 }
 
-template <class T>
+template <typename T>
 bool operator!=(const Complex<T> &_complex1, const T &_comp)
 {
     return !(_complex1 == _comp);
 }
 
-template <class T>
+template <typename T>
 bool operator==(const int &_comp, const Complex<T> &_complex2)
 {
     if (_complex2.getImaginary() != 0 || _complex2.getPhi() != 0)
@@ -438,13 +438,13 @@ bool operator==(const int &_comp, const Complex<T> &_complex2)
         return false;
 }
 
-template <class T>
+template <typename T>
 bool operator!=(const int &_comp, const Complex<T> &_complex2)
 {
     return !(_comp == _complex2);
 }
 
-template <class T>
+template <typename T>
 bool operator==(const Complex<T> &_complex1, const int &_comp)
 {
     if (_complex1.getImaginary() != 0 || _complex1.getPhi() != 0)
@@ -455,13 +455,13 @@ bool operator==(const Complex<T> &_complex1, const int &_comp)
         return false;
 }
 
-template <class T>
+template <typename T>
 bool operator!=(const Complex<T> &_complex1, const int &_comp)
 {
     return !(_complex1 == _comp);
 }
 
-template <class T>
+template <typename T>
 void Complex<T>::swap(Complex<T> &_lh, Complex<T> &_rh)
 {
     using std::swap;
