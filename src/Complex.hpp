@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include <math.h>
+#include <cmath>
 
 template <typename T>
 class Complex
@@ -13,31 +13,27 @@ private:
     T phi = 0;
 
     void calculatePolarValues() noexcept;
-
     void calculateCartesianValues() noexcept;
 
 public:
-    Complex() {}
-    Complex(const T &_re, const T &_img = 0, const T &_abs = 0, const T &_phi = 0);
-    Complex(const Complex &_complex);
+    constexpr Complex() = default;
+    explicit constexpr Complex(const T &_re, const T &_img = 0, const T &_abs = 0, const T &_phi = 0);
 
-    T getReal() const noexcept;
-    T getImaginary() const noexcept;
-    T getAbsolute() const noexcept;
-    T getPhi() const noexcept;
+    constexpr const T &getReal() const noexcept;
+    constexpr const T &getImaginary() const noexcept;
+    constexpr const T &getAbsolute() const noexcept;
+    constexpr const T &getPhi() const noexcept;
 
-    void setReal(const T &_re);
-    void setImaginary(const T &_img);
-    void setAbsolute(const T &_abs);
-    void setPhi(const T &_phi);
+    Complex &setReal(const T &_re);
+    Complex &setImaginary(const T &_img);
+    Complex &setAbsolute(const T &_abs);
+    Complex &setPhi(const T &_phi);
 
     std::string toString(void);
     static std::string toString(const Complex &_complex);
 
-    Complex<T> conjugate(void);
+    Complex<T> &conjugate(void);
     static Complex<T> conjugate(const Complex<T> &_complex);
-
-    Complex<T> &operator=(const Complex<T> &_complex);
 
     Complex<T> &operator++();
     Complex<T> &operator--();
@@ -52,24 +48,26 @@ public:
     Complex<T> &operator*=(const T &_add);
     Complex<T> &operator/=(const Complex<T> &_complex);
     Complex<T> &operator/=(const T &_add);
+
+    void swap(Complex<T> &_lh, Complex<T> &_rh);
 };
 
 template <typename T>
 void Complex<T>::calculatePolarValues() noexcept
 {
-    this->abs = sqrt(pow(this->re, 2) + pow(this->img, 2));
-    this->phi = atan(double(this->img) / this->re);
+    this->abs = std::sqrt(std::pow(this->re, 2) + std::pow(this->img, 2));
+    this->phi = std::atan(static_cast<double>(this->img) / this->re);
 }
 
 template <typename T>
 void Complex<T>::calculateCartesianValues() noexcept
 {
-    this->re = this->abs * cos(this->phi);
-    this->img = this->abs * sin(this->phi);
+    this->re = this->abs * std::cos(this->phi);
+    this->img = this->abs * std::sin(this->phi);
 }
 
 template <typename T>
-Complex<T>::Complex(const T &_re, const T &_img, const T &_abs, const T &_phi) : re(_re), img(_img), abs(_abs), phi(_phi)
+constexpr Complex<T>::Complex(const T &_re, const T &_img, const T &_abs, const T &_phi) : re(_re), img(_img), abs(_abs), phi(_phi)
 {
     if (_re != 0 && _img != 0)
         this->calculatePolarValues();
@@ -78,40 +76,41 @@ Complex<T>::Complex(const T &_re, const T &_img, const T &_abs, const T &_phi) :
 }
 
 template <typename T>
-Complex<T>::Complex(const Complex &_complex) : re(_complex.getReal()), img(_complex.getImaginary()), abs(_complex.getAbsolute()), phi(_complex.getPhi()) {}
+constexpr const T &Complex<T>::getReal() const noexcept { return this->re; }
+template <typename T>
+constexpr const T &Complex<T>::getImaginary() const noexcept { return this->img; }
+template <typename T>
+constexpr const T &Complex<T>::getAbsolute() const noexcept { return this->abs; }
+template <typename T>
+constexpr const T &Complex<T>::getPhi() const noexcept { return this->phi; }
 
 template <typename T>
-T Complex<T>::getReal() const noexcept { return this->re; }
-template <typename T>
-T Complex<T>::getImaginary() const noexcept { return this->img; }
-template <typename T>
-T Complex<T>::getAbsolute() const noexcept { return this->abs; }
-template <typename T>
-T Complex<T>::getPhi() const noexcept { return this->phi; }
-
-template <typename T>
-void Complex<T>::setReal(const T &_re)
+Complex<T> &Complex<T>::setReal(const T &_re)
 {
     this->re = _re;
     this->calculatePolarValues();
+    return *this;
 }
 template <typename T>
-void Complex<T>::setImaginary(const T &_img)
+Complex<T> &Complex<T>::setImaginary(const T &_img)
 {
     this->img = _img;
     this->calculatePolarValues();
+    return *this;
 }
 template <typename T>
-void Complex<T>::setAbsolute(const T &_abs)
+Complex<T> &Complex<T>::setAbsolute(const T &_abs)
 {
     this->abs = _abs;
     this->calculateCartesianValues();
+    return *this;
 }
 template <typename T>
-void Complex<T>::setPhi(const T &_phi)
+Complex<T> &Complex<T>::setPhi(const T &_phi)
 {
     this->phi = _phi;
     this->calculateCartesianValues();
+    return *this;
 }
 
 template <typename T>
@@ -131,19 +130,10 @@ template <typename T>
 std::string Complex<T>::toString(void) { return Complex<T>::toString(*this); }
 
 template <typename T>
-Complex<T> Complex<T>::conjugate(void)
+Complex<T> &Complex<T>::conjugate(void)
 {
-    Complex<T> result(this->re, this->img * (-1));
-    return result;
-}
-
-template <typename T>
-Complex<T> &Complex<T>::operator=(const Complex<T> &_complex)
-{
-    this->re = _complex.getReal();
-    this->img = _complex.getImaginary();
-    this->abs = _complex.getAbsolute();
-    this->phi = _complex.getPhi();
+    this->img *= (-1);
+    this->calculatePolarValues();
     return *this;
 }
 
@@ -469,4 +459,15 @@ template <class T>
 bool operator!=(const Complex<T> &_complex1, const int &_comp)
 {
     return !(_complex1 == _comp);
+}
+
+template <class T>
+void Complex<T>::swap(Complex<T> &_lh, Complex<T> &_rh)
+{
+    using std::swap;
+
+    swap(_lh.abs, _rh.abs);
+    swap(_lh.img, _rh.img);
+    swap(_lh.re, _rh.re);
+    swap(_lh.phi, _rh.phi);
 }
