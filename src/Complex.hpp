@@ -13,12 +13,12 @@ private:
     T abs = 0;
     T phi = 0;
 
-    void calculatePolarValues() noexcept
+    constexpr void calculatePolarValues() noexcept
     {
         this->abs = std::sqrt(std::pow(this->re, 2) + std::pow(this->img, 2));
         this->phi = std::atan(static_cast<double>(this->img) / this->re);
     }
-    void calculateCartesianValues() noexcept
+    constexpr void calculateCartesianValues() noexcept
     {
         this->re = this->abs * std::cos(this->phi);
         this->img = this->abs * std::sin(this->phi);
@@ -39,25 +39,25 @@ public:
     constexpr const T &getAbsolute() const noexcept { return this->abs; }
     constexpr const T &getPhi() const noexcept { return this->phi; }
 
-    Complex &setReal(const T &_re) noexcept
+    constexpr Complex &setReal(const T &_re) noexcept
     {
         this->re = _re;
         this->calculatePolarValues();
         return *this;
     }
-    Complex &setImaginary(const T &_img) noexcept
+    constexpr Complex &setImaginary(const T &_img) noexcept
     {
         this->img = _img;
         this->calculatePolarValues();
         return *this;
     }
-    Complex &setAbsolute(const T &_abs) noexcept
+    constexpr Complex &setAbsolute(const T &_abs) noexcept
     {
         this->abs = _abs;
         this->calculateCartesianValues();
         return *this;
     }
-    Complex &setPhi(const T &_phi) noexcept
+    constexpr Complex &setPhi(const T &_phi) noexcept
     {
         this->phi = _phi;
         this->calculateCartesianValues();
@@ -77,58 +77,58 @@ public:
         }
     }
 
-    Complex<T> &conjugate(void)
+    constexpr Complex<T> &conjugate(void)
     {
         this->img *= (-1);
         this->calculatePolarValues();
         return *this;
     }
-    static Complex<T> conjugate(const Complex<T> &_complex)
+    constexpr static Complex<T> conjugate(const Complex<T> &_complex)
     {
         _complex.img *= (-1);
         _complex.calculatePolarValues();
         return _complex;
     }
 
-    Complex<T> &operator++()
+    constexpr Complex<T> &operator++()
     {
         this->re++;
         this->calculatePolarValues();
         return *this;
     }
-    Complex<T> &operator--()
+    constexpr Complex<T> &operator--()
     {
         this->re--;
         this->calculatePolarValues();
         return *this;
     }
-    Complex<T> operator++(int)
+    constexpr Complex<T> operator++(int)
     {
         Complex result(*this);
         ++(*this);
         return result;
     }
-    Complex<T> operator--(int)
+    constexpr Complex<T> operator--(int)
     {
         Complex result(*this);
         --(*this);
         return result;
     }
 
-    Complex<T> &operator+=(const T &_add)
+    constexpr Complex<T> &operator+=(const T &_add)
     {
         this->re += _add;
         this->calculatePolarValues();
         return *this;
     }
-    Complex<T> &operator+=(const Complex<T> &_complex)
+    constexpr Complex<T> &operator+=(const Complex<T> &_complex)
     {
         this->re = this->re + _complex.getReal();
         this->img = this->img + _complex.getImaginary();
         this->calculatePolarValues();
         return *this;
     }
-    Complex<T> &operator-=(const Complex<T> &_complex)
+    constexpr Complex<T> &operator-=(const Complex<T> &_complex)
     {
         this->re = this->re - _complex.getReal();
         this->img = this->img - _complex.getImaginary();
@@ -136,13 +136,13 @@ public:
         return *this;
     }
 
-    Complex<T> &operator-=(const T &_add)
+    constexpr Complex<T> &operator-=(const T &_add)
     {
         this->re -= _add;
         this->calculatePolarValues();
         return *this;
     }
-    Complex<T> &operator*=(const Complex<T> &_complex)
+    constexpr Complex<T> &operator*=(const Complex<T> &_complex)
     {
         const auto re = (this->getReal() * _complex.getReal()) - (this->getImaginary() * _complex.getImaginary());
         const auto img = (this->getReal() * _complex.getImaginary()) + (this->getImaginary() * _complex.getReal());
@@ -151,14 +151,14 @@ public:
         this->calculatePolarValues();
         return *this;
     }
-    Complex<T> &operator*=(const T &_add)
+    constexpr Complex<T> &operator*=(const T &_add)
     {
         this->re = this->re * _add;
         this->img = this->img * _add;
         this->calculatePolarValues();
         return *this;
     }
-    Complex<T> &operator/=(const Complex<T> &_complex)
+    constexpr Complex<T> &operator/=(const Complex<T> &_complex)
     {
         const auto re = static_cast<T>((this->getReal() * _complex.getReal()) + (this->getImaginary() * _complex.getImaginary())) / (pow(_complex.getReal(), 2) + pow(_complex.getImaginary(), 2));
         const auto img = static_cast<T>(((this->getReal() * (-1)) * _complex.getImaginary()) + (_complex.getReal() * this->getImaginary())) / (pow(_complex.getReal(), 2) + pow(_complex.getImaginary(), 2));
@@ -167,7 +167,7 @@ public:
         this->calculatePolarValues();
         return *this;
     }
-    Complex<T> &operator/=(const T &_add)
+    constexpr Complex<T> &operator/=(const T &_add)
     {
         const auto re = static_cast<T>((this->getReal() * _add)) / (pow(_add, 2));
         const auto img = static_cast<T>(((_add * this->getImaginary())) / pow(_add, 2));
@@ -178,14 +178,14 @@ public:
     }
 
     // Addition
-    Complex<T> operator+(const Complex<T> &_complex) const
+    constexpr Complex<T> operator+(const Complex<T> &_complex) const
     {
         const auto re = this->getReal() + _complex.getReal();
         const auto img = this->getImaginary() + _complex.getImaginary();
         return Complex<T>(re, img);
     }
 
-    Complex<T> operator+(const T &_add) const
+    constexpr Complex<T> operator+(const T &_add) const
     {
         const auto re = _add + this->getReal();
         const auto img = this->getImaginary();
@@ -193,14 +193,14 @@ public:
     }
 
     // Subtraction
-    Complex<T> operator-(const Complex<T> &_complex) const
+    constexpr Complex<T> operator-(const Complex<T> &_complex) const
     {
         const auto re = this->getReal() - _complex.getReal();
         const auto img = this->getImaginary() - _complex.getImaginary();
         return Complex<T>(re, img);
     }
 
-    Complex<T> operator-(const T &_add) const
+    constexpr Complex<T> operator-(const T &_add) const
     {
         const auto re = this->getReal() - _add;
         const auto img = this->getImaginary();
@@ -208,14 +208,14 @@ public:
     }
 
     // Mulitplication
-    Complex<T> operator*(const Complex<T> &_complex) const
+    constexpr Complex<T> operator*(const Complex<T> &_complex) const
     {
         const auto re = (this->getReal() * _complex.getReal()) - (this->getImaginary() * _complex.getImaginary());
         const auto img = (this->getReal() * _complex.getImaginary()) + (this->getImaginary() * _complex.getReal());
         return Complex<T>(re, img);
     }
 
-    Complex<T> operator*(const T &_add) const
+    constexpr Complex<T> operator*(const T &_add) const
     {
         const auto re = this->getReal() * _add;
         const auto img = this->getImaginary() * _add;
@@ -223,21 +223,21 @@ public:
     }
 
     // Division
-    Complex<T> operator/(const Complex<T> &_complex) const
+    constexpr Complex<T> operator/(const Complex<T> &_complex) const
     {
         const auto re = static_cast<T>((this->getReal() * _complex.getReal()) + (this->getImaginary() * _complex.getImaginary())) / (pow(_complex.getReal(), 2) + pow(_complex.getImaginary(), 2));
         const auto img = static_cast<T>(((this->getReal() * (-1)) * _complex.getImaginary()) + (_complex.getReal() * this->getImaginary())) / (pow(_complex.getReal(), 2) + pow(_complex.getImaginary(), 2));
         return Complex<T>(re, img);
     }
 
-    Complex<T> operator/(const T &_add) const
+    constexpr Complex<T> operator/(const T &_add) const
     {
         const auto re = static_cast<T>((this->getReal() * _add)) / (pow(_add, 2));
         const auto img = static_cast<T>(((_add * this->getImaginary())) / pow(_add, 2));
         return Complex<T>(re, img);
     }
 
-    void swap(Complex<T> &_lh, Complex<T> &_rh)
+    constexpr void swap(Complex<T> &_lh, Complex<T> &_rh)
     {
         using std::swap;
 
@@ -247,22 +247,22 @@ public:
         swap(_lh.phi, _rh.phi);
     }
 
-    bool operator==(const Complex<T> &_complex) const
+    constexpr bool operator==(const Complex<T> &_complex) const
     {
         return (getReal() == _complex.getReal() && getImaginary() == _complex.getImaginary() && getPhi() == _complex.getPhi() && getAbsolute() == _complex.getAbsolute());
     }
 
-    bool operator!=(const Complex<T> &_complex) const
+    constexpr bool operator!=(const Complex<T> &_complex) const
     {
         return !(*this == _complex);
     }
 
-    bool operator==(const T &_comp) const
+    constexpr bool operator==(const T &_comp) const
     {
         return (getReal() == _comp);
     }
 
-    bool operator!=(const T &_comp) const
+    constexpr bool operator!=(const T &_comp) const
     {
         return !(_comp == *this);
     }
@@ -270,7 +270,7 @@ public:
 
 // Mulitplication
 template <typename T>
-Complex<T> operator*(const T &_add, const Complex<T> &_complex)
+constexpr Complex<T> operator*(const T &_add, const Complex<T> &_complex)
 {
     T re;
     T img;
@@ -281,7 +281,7 @@ Complex<T> operator*(const T &_add, const Complex<T> &_complex)
 
 // Division
 template <typename T>
-Complex<T> operator/(const T &_add, const Complex<T> &_complex)
+constexpr Complex<T> operator/(const T &_add, const Complex<T> &_complex)
 {
     T re;
     T img;
@@ -292,7 +292,7 @@ Complex<T> operator/(const T &_add, const Complex<T> &_complex)
 
 // Addition
 template <typename T>
-Complex<T> operator+(const T &_add, const Complex<T> &_complex)
+constexpr Complex<T> operator+(const T &_add, const Complex<T> &_complex)
 {
     T re;
     T img;
@@ -303,7 +303,7 @@ Complex<T> operator+(const T &_add, const Complex<T> &_complex)
 
 // Subtraction
 template <typename T>
-Complex<T> operator-(const T &_add, const Complex<T> &_complex)
+constexpr Complex<T> operator-(const T &_add, const Complex<T> &_complex)
 {
     T re;
     T img;
@@ -313,13 +313,13 @@ Complex<T> operator-(const T &_add, const Complex<T> &_complex)
 }
 
 template <typename T>
-bool operator==(const T &_comp, const Complex<T> &_complex)
+constexpr bool operator==(const T &_comp, const Complex<T> &_complex)
 {
     return _complex.getReal() == _comp;
 }
 
 template <typename T>
-bool operator!=(const T &_comp, const Complex<T> &_complex)
+constexpr bool operator!=(const T &_comp, const Complex<T> &_complex)
 {
     return !(_comp == _complex);
 }
