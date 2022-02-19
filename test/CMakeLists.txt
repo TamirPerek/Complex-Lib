@@ -1,4 +1,4 @@
-set(THIS Complexests)
+set(THIS Complextests)
 
 file(GLOB_RECURSE TARGET_SRC "./*.cpp" "./*.hpp" "./*.h")
 
