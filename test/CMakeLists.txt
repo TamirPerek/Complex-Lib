@@ -1,8 +1,9 @@
 set(THIS Complextests)
 
-file(GLOB_RECURSE TARGET_SRC "./*.cpp" "./*.hpp" "./*.h")
-
-add_executable(${THIS} ${TARGET_SRC})
+add_executable(${THIS} 
+    ComplexTest.cpp
+    ComplexTestCustom.cpp
+)
 
 target_link_libraries(${THIS}
                         gtest_main

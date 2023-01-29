@@ -1,5 +1,5 @@
-file(GLOB_RECURSE TARGET_SRC "./*.cpp" "./*.hpp" "./*.c" "./*.h")
-
-add_library(${This} STATIC ${TARGET_SRC})
+add_library(${This} INTERFACE 
+    Complex.hpp
+)
 target_sources(${This} PRIVATE ${TARGET_SRC})
-target_include_directories(${This} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(${This} INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})

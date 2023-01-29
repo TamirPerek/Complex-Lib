@@ -4,7 +4,8 @@
 
 #include <gtest/gtest.h>
 
-typedef Complex<double> Comp;
+using Comp = Complex<double>;
+// typedef Complex<double> Comp;
 
 struct ComplexTest : public testing::Test
 {
@@ -38,7 +39,7 @@ TEST_F(ComplexTest, Create)
     EXPECT_DOUBLE_EQ(tNumber.getAbsolute(), 25.942243542145693);
     EXPECT_DOUBLE_EQ(tNumber.getPhi(), 1.0899090465995609);
 
-    Comp tNumber2{0, 0, 25.0, 1.08};
+    Comp tNumber2{0.0, 0.0, 25.0, 1.08};
     EXPECT_DOUBLE_EQ(tNumber2.getReal(), 11.783209104343499);
     EXPECT_DOUBLE_EQ(tNumber2.getImaginary(), 22.048945172123688);
     EXPECT_DOUBLE_EQ(tNumber2.getAbsolute(), 25.0);
@@ -290,7 +291,24 @@ TEST_F(ComplexTest, CompareNotEquals)
     EXPECT_TRUE(tComp != tNumber1);
 }
 
-// TEST_F(ComplexTest, DontCompile)
-// {
-//     Complex<std::string> tNumber;
-// }
+class Throwing_Class
+{
+    public:
+    Throwing_Class() noexcept(false)
+    {
+        throw std::runtime_error("Expected exeption.");
+    }
+    Throwing_Class(int) noexcept(false)
+    {
+        throw std::runtime_error("Expected exeption.");
+    }
+    Throwing_Class &operator=(int )
+    {
+        return *this;
+    }
+};
+
+TEST_F(ComplexTest, Throwing)
+{
+    EXPECT_THROW(Complex<Throwing_Class> tComp, std::runtime_error);
+}
