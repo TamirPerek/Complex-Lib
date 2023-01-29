@@ -6,4 +6,4 @@
 
 Just a small header only library for complex numbers
 
-[ ] Todo: Make custom math functions useable.
+- [ ] Todo: Make custom math functions useable.
