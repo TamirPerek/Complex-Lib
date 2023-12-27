@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include "Complex.hpp"
+#include "Complex.h"
 
 #include <gtest/gtest.h>
 

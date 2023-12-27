@@ -16,5 +16,5 @@ Info.plist
 
 *.json
 
-build/
+build*/
 bin/
