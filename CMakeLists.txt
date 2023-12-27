@@ -4,7 +4,7 @@ project(
     Complex-Lib 
     VERSION 0.1.0
     DESCRIPTION "Small library ..."
-    HOMEPAGE_URL "https://github.com/TamirPerek/"
+    HOMEPAGE_URL "https://github.com/TamirPerek/Complex-Lib"
 )
 
 option(COMPLEX_INCLUDE_TESTS "Remove GoogleTest dependecy." OFF)
